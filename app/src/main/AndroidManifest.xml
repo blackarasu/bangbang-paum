@@ -10,7 +10,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BangBang">
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".GameActivity"
+            android:screenOrientation="landscape"/>
+        <activity
+            android:name=".HelpActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".GloryActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
