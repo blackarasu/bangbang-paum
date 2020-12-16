@@ -4,20 +4,26 @@ import android.content.Context;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.View.OnTouchListener;
 
-public class OnSwipeTouchListener implements OnTouchListener {
+import java.lang.invoke.ConstantCallSite;
+
+public class OnGestureListener implements OnTouchListener {
 
     private final GestureDetector gestureDetector;
+    private final ScaleGestureDetector scaleGestureDetector;
 
-    public OnSwipeTouchListener (Context ctx){
+    public OnGestureListener(Context ctx){
         gestureDetector = new GestureDetector(ctx, new GestureListener());
+        scaleGestureDetector = new ScaleGestureDetector(ctx, new OnScaleGestureListener());
     }
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         gestureDetector.onTouchEvent(event);
+        scaleGestureDetector.onTouchEvent(event);
         return true;
     }
 
@@ -72,6 +78,35 @@ public class OnSwipeTouchListener implements OnTouchListener {
         }
     }
 
+    private final class OnScaleGestureListener extends
+            ScaleGestureDetector.SimpleOnScaleGestureListener {
+
+        float scaleFactor = 1f, prevScaleFactor = 1f;
+
+        @Override
+        public boolean onScale(ScaleGestureDetector detector) {
+
+            scaleFactor *= detector.getScaleFactor();
+
+            return true;
+        }
+
+        @Override
+        public boolean onScaleBegin(ScaleGestureDetector detector) {
+            return true;
+        }
+
+        @Override
+        public void onScaleEnd(ScaleGestureDetector detector) {
+            if (prevScaleFactor > scaleFactor) {
+                onZoomOut();
+            } else if (prevScaleFactor < scaleFactor) {
+                onZoomIn();
+            }
+            prevScaleFactor = scaleFactor;
+        }
+    }
+
     public void onSingleTap(){
     }
 
@@ -85,5 +120,11 @@ public class OnSwipeTouchListener implements OnTouchListener {
     }
 
     public void onSwipeBottom() {
+    }
+
+    public void onZoomOut(){
+    }
+
+    public void onZoomIn(){
     }
 }
