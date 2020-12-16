@@ -6,7 +6,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +24,10 @@ public class MainActivity extends AppCompatActivity {
             }
             public void onSwipeBottom(){
                 Intent intent = new Intent(MainActivity.this, HelpActivity.class);
+                startActivity(intent);
+            }
+            public void onSingleTap(){
+                Intent intent = new Intent(MainActivity.this, GameActivity.class);
                 startActivity(intent);
             }
         });
