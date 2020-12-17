@@ -20,6 +20,8 @@ public class GloryActivity extends AppCompatActivity {
             @Override
             public boolean onTouch(View v, MotionEvent event){
                 if(event.getAction() == MotionEvent.ACTION_UP){
+                    Intent intent = new Intent(GloryActivity.this, MainActivity.class);
+                    startActivity(intent);
                     finish();
                 }
                 return true;

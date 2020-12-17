@@ -87,7 +87,6 @@ public class OnGestureListener implements OnTouchListener {
         public boolean onScale(ScaleGestureDetector detector) {
 
             scaleFactor *= detector.getScaleFactor();
-
             return true;
         }
 
