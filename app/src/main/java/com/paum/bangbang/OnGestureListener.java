@@ -1,5 +1,6 @@
 package com.paum.bangbang;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
@@ -7,8 +8,6 @@ import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.View.OnTouchListener;
-
-import java.lang.invoke.ConstantCallSite;
 
 public class OnGestureListener implements OnTouchListener {
 
@@ -20,6 +19,7 @@ public class OnGestureListener implements OnTouchListener {
         scaleGestureDetector = new ScaleGestureDetector(ctx, new OnScaleGestureListener());
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         gestureDetector.onTouchEvent(event);
