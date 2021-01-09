@@ -20,24 +20,33 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         View view = findViewById(android.R.id.content);
-        view.setOnTouchListener(new OnGestureListener(MainActivity.this){
-            public void onSwipeLeft(){
+        view.setOnTouchListener(new OnGestureListener(MainActivity.this) {
+            public void onSwipeLeft() {
                 Intent intent = new Intent(MainActivity.this, GloryActivity.class);
                 startActivity(intent);
             }
-            public void onSwipeTop(){
+
+            public void onSwipeRight() {
+                Intent intent = new Intent(MainActivity.this, GloryActivity.class);
+                startActivity(intent);
+            }
+
+            public void onSwipeTop() {
                 Intent intent = new Intent(MainActivity.this, HelpActivity.class);
                 startActivity(intent);
             }
-            public void onSwipeBottom(){
+
+            public void onSwipeBottom() {
                 Intent intent = new Intent(MainActivity.this, HelpActivity.class);
                 startActivity(intent);
             }
-            public void onSingleTap(){
+
+            public void onSingleTap() {
                 Intent intent = new Intent(MainActivity.this, GameActivity.class);
                 startActivity(intent);
             }
-            public void onZoomOut(){
+
+            public void onZoomOut() {
                 finish();
             }
         });
