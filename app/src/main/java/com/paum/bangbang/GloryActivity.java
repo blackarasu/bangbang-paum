@@ -54,6 +54,9 @@ public class GloryActivity extends AppCompatActivity {
                 dbScores.insertScore("Test 4", 256);
             }
             String text = dbScores.getNScores(3);
+            if (text.isEmpty()) {
+                text = getString(R.string.noScoreToText);
+            }
             toast("Liczba wierszy w tabeli " + dbScores.numberOfRows());
             int speechStatus = textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null);
             if (speechStatus == TextToSpeech.ERROR) {
