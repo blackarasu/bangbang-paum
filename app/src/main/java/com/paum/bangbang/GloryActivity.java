@@ -26,8 +26,8 @@ public class GloryActivity extends AppCompatActivity {
         View view = findViewById(android.R.id.content);
         view.setOnTouchListener((v, event) -> {
             if (event.getAction() == MotionEvent.ACTION_UP) {
-                @SuppressLint("ClickableViewAccessibility") Intent intent = new Intent(GloryActivity.this, MainActivity.class);
-                startActivity(intent);
+                //@SuppressLint("ClickableViewAccessibility") Intent intent = new Intent(GloryActivity.this, MainActivity.class);
+                //startActivity(intent);
                 finish();
             }
             return true;
