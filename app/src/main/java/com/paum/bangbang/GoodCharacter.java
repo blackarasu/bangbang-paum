@@ -33,7 +33,7 @@ public class GoodCharacter implements ICharacter{
         // reset the color
         LinearLayout layout = (LinearLayout)((Activity)this.context).findViewById(this.layoutId);
         layout.setBackgroundColor(Color.WHITE);
-        Log.i(TAG, "Good character was shot");
+        Log.i(TAG, "Good character was shot. Player's lives: " + player.getLives());
     }
 
     @Override

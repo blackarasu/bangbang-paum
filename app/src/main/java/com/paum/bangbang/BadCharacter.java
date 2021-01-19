@@ -34,7 +34,7 @@ public class BadCharacter implements ICharacter{
         // reset the color
         LinearLayout layout = (LinearLayout)((Activity)this.context).findViewById(this.layoutId);
         layout.setBackgroundColor(Color.WHITE);
-        Log.i(TAG, "Bad character was shot");
+        Log.i(TAG, "Bad character was shot. Player's score: " + player.getScore());
     }
 
     @Override

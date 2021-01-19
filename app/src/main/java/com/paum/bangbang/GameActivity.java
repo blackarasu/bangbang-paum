@@ -1,6 +1,7 @@
 package com.paum.bangbang;
 
 import android.annotation.SuppressLint;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.MotionEvent;
@@ -19,8 +20,14 @@ public class GameActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_game);
         this.gameStage = new GameStage(this);
-        this.player = new Player();
+        Resources res = getResources();
+        int playerInitLives = res.getInteger(R.integer.playerInitialLives);
+        int playerScoreForShot = res.getInteger(R.integer.scoreForKillBadCharacter);
+        this.player = new Player(playerInitLives, playerScoreForShot);
+        PlayerLivesObserver livesObserver = new PlayerLivesObserver(this);
+        this.player.attach(livesObserver);
         GameSoundPlayer.initialize(this);
+
         /*View view = findViewById(android.R.id.content);
         view.setOnTouchListener((v, event) -> {
             if (event.getAction() == MotionEvent.ACTION_UP) {
@@ -57,5 +64,12 @@ public class GameActivity extends AppCompatActivity {
             }
             return true;
         });
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        this.gameStage.stopGeneratingCharacters();
+        //in the future save player's score in a db
     }
 }

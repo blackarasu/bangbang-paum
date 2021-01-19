@@ -17,21 +17,22 @@ public class GameSoundPlayer {
 
     private GameSoundPlayer(Context context){
         // initialize SoundPool class
+        this.context = context;
+        int maxSoundStreams = this.context.getResources().getInteger(R.integer.maxSoundStreams);
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
             AudioAttributes audioAttributes = new AudioAttributes.Builder()
                     .setUsage(AudioAttributes.USAGE_GAME)
                     .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
                     .build();
             soundPool = new SoundPool.Builder().
-                    setMaxStreams(R.integer.maxSoundStreams)
+                    setMaxStreams(maxSoundStreams)
                     .setAudioAttributes(audioAttributes)
                     .build();
         }
         else{
-            soundPool = new SoundPool(R.integer.maxSoundStreams, AudioManager.STREAM_MUSIC, 0);
+            soundPool = new SoundPool(maxSoundStreams, AudioManager.STREAM_MUSIC, 0);
         }
 
-        this.context = context;
         // load (for now just 2) sound files
         this.loadWeapon_enemyAppeared = this.soundPool.load(context, R.raw.loadweaponenemyappeared, 1);
         this.money_clientAppeared = this.soundPool.load(context, R.raw.moneyclientappeared1, 1);

@@ -61,6 +61,10 @@ public class GameStage {
         }.start();
     }
 
+    void stopGeneratingCharacters(){
+        this.countDownTimer.cancel();
+    }
+
     // handle player shoot in the door with the specified index
     public void playerShoot(Player player, int index){
         this.doors[index].shoot(player);
