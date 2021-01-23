@@ -12,17 +12,17 @@ public class CharacterFactory implements ICharacterFactory{
      * @return Instance of the character
      */
     @Override
-    public ICharacter createCharacter(Context context, int layoutId, double chance) {
+    public ICharacter createCharacter(Context context, Player player, Door door, double chance) {
         // creates character
         Random rnd = new Random();
         int ret = rnd.nextInt(100) + 1;
         if(ret < chance * 100){
             // return good character
-            return new BadCharacter(context, layoutId);
+            return new BadCharacter(context, player, door);
         }
         else{
             // return bad character
-            return new GoodCharacter(context, layoutId);
+            return new GoodCharacter(context, player, door);
         }
     }
 }

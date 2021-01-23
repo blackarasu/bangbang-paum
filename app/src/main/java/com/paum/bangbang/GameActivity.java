@@ -19,30 +19,23 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_game);
-        this.gameStage = new GameStage(this);
         Resources res = getResources();
-        int playerInitLives = res.getInteger(R.integer.playerInitialLives);
-        int playerScoreForShot = res.getInteger(R.integer.scoreForKillBadCharacter);
-        this.player = new Player(playerInitLives, playerScoreForShot);
-        PlayerLivesObserver livesObserver = new PlayerLivesObserver(this);
-        this.player.attach(livesObserver);
+        // initialize player with initial values from resources
+        this.player = new Player(res.getInteger(R.integer.playerInitialLives), res.getInteger(R.integer.scoreForKillBadCharacter));
+        // initialize game stage
+        this.gameStage = new GameStage(this, this.player);
+        // attach lose one life observer - activates when player lose life
+        this.player.attachLoseOneLifeObserver(new LoseOneLifeObserver(this.gameStage));
+        // attach player lives observer - activates when player lose all lives
+        this.player.attach(new PlayerLivesObserver(this, this.gameStage));
+        // initialize class responsible for playing game sounds
         GameSoundPlayer.initialize(this);
-
-        /*View view = findViewById(android.R.id.content);
-        view.setOnTouchListener((v, event) -> {
-            if (event.getAction() == MotionEvent.ACTION_UP) {
-                Intent intent = new Intent(GameActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
-            return true;
-        });*/
 
         // Left side of the screen
         LinearLayout leftLayout = findViewById(R.id.layoutLeft);
         leftLayout.setOnTouchListener((v, event) -> {
             if (event.getAction() == MotionEvent.ACTION_UP){
-                gameStage.playerShoot(this.player, 0);
+                gameStage.playerShoot(0);
             }
             return true;
         });
@@ -51,7 +44,7 @@ public class GameActivity extends AppCompatActivity {
         LinearLayout middleLayout = findViewById(R.id.layoutMiddle);
         middleLayout.setOnTouchListener((v, event) -> {
             if (event.getAction() == MotionEvent.ACTION_UP){
-                gameStage.playerShoot(this.player, 1);
+                gameStage.playerShoot(1);
             }
             return true;
         });
@@ -60,7 +53,7 @@ public class GameActivity extends AppCompatActivity {
         LinearLayout rightLayout = findViewById(R.id.layoutRight);
         rightLayout.setOnTouchListener((v, event) -> {
             if (event.getAction() == MotionEvent.ACTION_UP){
-                gameStage.playerShoot(this.player, 2);
+                gameStage.playerShoot(2);
             }
             return true;
         });
@@ -69,7 +62,6 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onDestroy(){
         super.onDestroy();
-        this.gameStage.stopGeneratingCharacters();
-        //in the future save player's score in a db
+        this.gameStage.finish();
     }
 }

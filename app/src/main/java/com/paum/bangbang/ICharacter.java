@@ -3,7 +3,9 @@ package com.paum.bangbang;
 // interface for characters
 public interface ICharacter {
     // handle appearance of the character
-    void appear(float leftVolumeSound, float rightVolumeSound);
+    void appear();
     // handle the shot
-    void getShot(Player player);
+    void getShot();
+    // delete character
+    void delete();
 }

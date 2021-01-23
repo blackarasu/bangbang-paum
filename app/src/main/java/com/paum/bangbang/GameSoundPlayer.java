@@ -14,6 +14,11 @@ public class GameSoundPlayer {
     private Context context;
     private int loadWeapon_enemyAppeared;
     private int money_clientAppeared;
+    private int angryVoice_enemyKilled;
+    private int wrong_shot;
+    private int player_shot;
+    private int machineGun_enemyNotKilled;
+    private int game_start;
 
     private GameSoundPlayer(Context context){
         // initialize SoundPool class
@@ -33,10 +38,21 @@ public class GameSoundPlayer {
             soundPool = new SoundPool(maxSoundStreams, AudioManager.STREAM_MUSIC, 0);
         }
 
+        // play game start when it will be loaded
+        this.soundPool.setOnLoadCompleteListener((soundPool, sampleId, status) -> {
+            if(sampleId == game_start){
+                gameStart();
+            }
+        });
+
         // load (for now just 2) sound files
         this.loadWeapon_enemyAppeared = this.soundPool.load(context, R.raw.loadweaponenemyappeared, 1);
         this.money_clientAppeared = this.soundPool.load(context, R.raw.moneyclientappeared1, 1);
-
+        this.angryVoice_enemyKilled = this.soundPool.load(context, R.raw.angryvoiceenemykilled2, 1);
+        this.wrong_shot = this.soundPool.load(context, R.raw.wrongshot, 1);
+        this.player_shot = this.soundPool.load(context, R.raw.playershoot2, 1);
+        this.machineGun_enemyNotKilled = this.soundPool.load(context, R.raw.machinegunenemyshoot2, 1);
+        this.game_start = this.soundPool.load(context, R.raw.bellgamestart, 1);
     }
 
     // return singleton instance
@@ -65,13 +81,38 @@ public class GameSoundPlayer {
     }
 
     // play sound of a good character (client) appearance
-    public void goodPlayerAppeared(float leftVolume, float rightVolume){
-        this.soundPool.play(money_clientAppeared, leftVolume, rightVolume, 0, 0, 1);
+    public void goodCharacterAppeared(VolumeSound volumeSound){
+        this.soundPool.play(money_clientAppeared, volumeSound.getLeftVolumeSound(), volumeSound.getRightVolumeSound(), 0, 0, 1);
     }
 
     // play sound of bad character (thief)  appearance
-    public void badPlayerAppeared(float leftVolume, float rightVolume){
-        this.soundPool.play(loadWeapon_enemyAppeared, leftVolume, rightVolume, 0, 0, 1);
+    public void badCharacterAppeared(VolumeSound volumeSound){
+        this.soundPool.play(loadWeapon_enemyAppeared, volumeSound.getLeftVolumeSound(), volumeSound.getRightVolumeSound(), 0, 0, 1);
+    }
+
+    // play sound of killing a bad character
+    public void badCharacterKilled(VolumeSound volumeSound){
+        this.soundPool.play(this.angryVoice_enemyKilled, volumeSound.getLeftVolumeSound(), volumeSound.getRightVolumeSound(), 0, 0, 1);
+    }
+
+    // play sound of a wrong shot
+    public void wrongShot(VolumeSound volumeSound){
+        this.soundPool.play(this.wrong_shot, volumeSound.getLeftVolumeSound(), volumeSound.getRightVolumeSound(), 0, 0, 1);
+    }
+
+    // play player shot
+    public void playerShot(VolumeSound volumeSound){
+        this.soundPool.play(this.player_shot, volumeSound.getLeftVolumeSound(), volumeSound.getRightVolumeSound(), 0, 0, 1);
+    }
+
+    // bad character did not die
+    public void badCharacterNotKilled(VolumeSound volumeSound){
+        this.soundPool.play(this.machineGun_enemyNotKilled, volumeSound.getLeftVolumeSound(), volumeSound.getRightVolumeSound(), 0, 0, 1);
+    }
+
+    // play game start signal
+    public void gameStart(){
+        this.soundPool.play(this.game_start, 1, 1, 0, 0, 1);
     }
 
     // release resources (probably in the future when game is over)
