@@ -60,6 +60,7 @@ public class GoodCharacter implements ICharacter{
 
     // timeout - character was not shot
     private void timeOut(){
+        GameSoundPlayer.getInstance(this.context).goodCharacterNotKilled(this.door.getVolumeSound());
         // remove character from the door
         this.door.reset();
         // accept the door

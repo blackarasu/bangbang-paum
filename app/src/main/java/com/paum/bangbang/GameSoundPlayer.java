@@ -19,6 +19,7 @@ public class GameSoundPlayer {
     private int player_shot;
     private int machineGun_enemyNotKilled;
     private int game_start;
+    private int thank_you;
 
     private GameSoundPlayer(Context context){
         // initialize SoundPool class
@@ -52,6 +53,7 @@ public class GameSoundPlayer {
         this.wrong_shot = this.soundPool.load(context, R.raw.wrongshot, 1);
         this.player_shot = this.soundPool.load(context, R.raw.playershoot2, 1);
         this.machineGun_enemyNotKilled = this.soundPool.load(context, R.raw.machinegunenemyshoot2, 1);
+        this.thank_you = this.soundPool.load(context, R.raw.thankyou, 1);
         this.game_start = this.soundPool.load(context, R.raw.bellgamestart, 1);
     }
 
@@ -113,6 +115,10 @@ public class GameSoundPlayer {
     // play game start signal
     public void gameStart(){
         this.soundPool.play(this.game_start, 1, 1, 0, 0, 1);
+    }
+
+    public void goodCharacterNotKilled(VolumeSound volumeSound){
+        this.soundPool.play(this.thank_you, volumeSound.getLeftVolumeSound(), volumeSound.getRightVolumeSound(), 0, 0, 1);
     }
 
     // release resources (probably in the future when game is over)
