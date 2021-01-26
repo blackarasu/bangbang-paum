@@ -38,6 +38,12 @@ public class OnGestureListener implements OnTouchListener {
         }
 
         @Override
+        public boolean onSingleTapUp(MotionEvent e){
+            onTapUp();
+            return true;
+        }
+
+        @Override
         public boolean onSingleTapConfirmed(MotionEvent e){
             onSingleTap();
             return true;
@@ -104,6 +110,9 @@ public class OnGestureListener implements OnTouchListener {
             }
             prevScaleFactor = scaleFactor;
         }
+    }
+
+    public void onTapUp(){
     }
 
     public void onSingleTap(){

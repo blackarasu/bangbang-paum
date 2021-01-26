@@ -17,6 +17,7 @@ public class BadCharacter implements ICharacter{
     private Player player;
     // the door in which character appeared
     private Door door;
+    private int existenceTime = 2000;
     private static final String TAG = "BadCharacter";
 
     public BadCharacter(Context context, Player player, Door door){
@@ -33,7 +34,7 @@ public class BadCharacter implements ICharacter{
         GameSoundPlayer.getInstance(this.context).badCharacterAppeared(this.door.getVolumeSound());
 
         // time of the character
-        characterTimer = new CountDownTimer(3000, 3000) {
+        characterTimer = new CountDownTimer(this.existenceTime, this.existenceTime) {
             @Override
             public void onTick(long millisUntilFinished) { }
 

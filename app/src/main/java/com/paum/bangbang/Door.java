@@ -3,6 +3,7 @@ package com.paum.bangbang;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.util.Log;
 import android.widget.LinearLayout;
 
@@ -11,16 +12,22 @@ public class Door {
     private ICharacter character;   // character in the door
     private VolumeSound volumeSound;    // represents volume settings for playing sounds
     private Context context;    // game activity context
-    private GameSoundPlayer gameSoundPlayer;
     private Player player;  // actual playing player
     private int layoutId;
+    private int topLayoutId;
+    private boolean accepted = false;
+    private IDoorObserver doorObserver;
+    private TopLayoutsManagement topLayoutsManagement;
 
-    public Door(Context context, Player player, int layoutId, VolumeSound volumeSound){
+    public Door(Context context, Player player, int layoutId, VolumeSound volumeSound, int topLayoutId, IDoorObserver doorObserver, TopLayoutsManagement topLayoutsManagement){
         this.character = null;
         this.volumeSound = volumeSound;
         this.context = context;
         this.layoutId = layoutId;
         this.player = player;
+        this.topLayoutId = topLayoutId;
+        this.doorObserver = doorObserver;
+        this.topLayoutsManagement = topLayoutsManagement;
     }
 
     // adds character to the door
@@ -57,13 +64,39 @@ public class Door {
         return this.volumeSound;
     }
 
-    // reset a door to a initial state - without a character
+    // resets the door
     public void reset(){
+        // if a character is inside - remove it
         if(this.character != null){
             this.character.delete();
             this.character = null;
         }
+        // resets a door appearance to the default
         LinearLayout layout = (LinearLayout)((Activity)this.context).findViewById(this.layoutId);
         layout.setBackgroundColor(Color.WHITE);
+    }
+
+    // go back to the initial state - without character and with not accepted state
+    public void hardReset(){
+        reset();
+        this.accepted = false;
+        LinearLayout topLayout = ((Activity)this.context).findViewById(this.topLayoutId);
+        // reset top layout according to the door to the initial state
+        GradientDrawable border = new GradientDrawable();
+        border.setColor(Color.RED);
+        topLayout.setBackground(border);
+    }
+
+    // accept the door - good character passed the door
+    public void acceptDoor(){
+        // notice a top layout
+        this.topLayoutsManagement.setAccepted(this.topLayoutId);
+        this.accepted = true;
+        // inform observer about the door acceptance
+        this.doorObserver.singleDoorAcceptanceDetected();
+    }
+
+    public boolean isAccepted(){
+        return this.accepted;
     }
 }

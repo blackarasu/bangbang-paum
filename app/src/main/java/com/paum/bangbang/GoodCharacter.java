@@ -20,6 +20,7 @@ public class GoodCharacter implements ICharacter{
     private Player player;
     // the door in which character appeared
     private Door door;
+    private int existenceTime = 2000;
     private static final String TAG = "GoodCharacter";
 
     public GoodCharacter(Context context, Player player, Door door){
@@ -36,7 +37,7 @@ public class GoodCharacter implements ICharacter{
         GameSoundPlayer.getInstance(this.context).goodCharacterAppeared(this.door.getVolumeSound());
 
         // time of the character
-        characterTimer = new CountDownTimer(3000, 3000) {
+        characterTimer = new CountDownTimer(this.existenceTime, this.existenceTime) {
             @Override
             public void onTick(long millisUntilFinished) { }
 
@@ -59,8 +60,11 @@ public class GoodCharacter implements ICharacter{
 
     // timeout - character was not shot
     private void timeOut(){
-        // just remove character from the door
-        door.reset();
+        // remove character from the door
+        this.door.reset();
+        // accept the door
+        this.door.acceptDoor();
+
         Log.i(TAG, "Good character was not shot.");
     }
 

@@ -3,4 +3,5 @@
     <integer name="playerInitialLives">3</integer>
     <integer name="scoreForKillBadCharacter">100</integer>
     <integer name="maxSoundStreams">5</integer>
+    <integer name="baseCharacterCreationTime">3000</integer>
 </resources>

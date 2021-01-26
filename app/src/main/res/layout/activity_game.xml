@@ -9,35 +9,116 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        >
 
         <LinearLayout
-            android:id="@+id/layoutLeft"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:background="@color/white"
-            android:clickable="true">
+            android:layout_weight="10"
+            android:orientation="horizontal"
+            >
+            <LinearLayout
+                android:id="@+id/layout_top0"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+
+                ></LinearLayout>
+            <LinearLayout
+                android:id="@+id/layout_top1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                ></LinearLayout>
+            <LinearLayout
+                android:id="@+id/layout_top2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                ></LinearLayout>
+            <LinearLayout
+                android:id="@+id/layout_top3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                ></LinearLayout>
+            <LinearLayout
+                android:id="@+id/layout_top4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                ></LinearLayout>
+            <LinearLayout
+                android:id="@+id/layout_top5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                ></LinearLayout>
+            <LinearLayout
+                android:id="@+id/layout_top6"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                ></LinearLayout>
+            <LinearLayout
+                android:id="@+id/layout_top7"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                ></LinearLayout>
+            <LinearLayout
+                android:id="@+id/layout_top8"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                ></LinearLayout>
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/layoutMiddle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:background="@color/white"
-            android:clickable="true">
-        </LinearLayout>
+            android:orientation="horizontal"
+            android:layout_weight="1">
+            <LinearLayout
+                android:id="@+id/layoutLeft"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:background="@color/white"
+                >
+            </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/layoutRight"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/white"
-            android:orientation="vertical">
+            <LinearLayout
+                android:id="@+id/layoutMiddle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:background="@color/white"
+                >
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layoutRight"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:orientation="vertical"
+                >
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

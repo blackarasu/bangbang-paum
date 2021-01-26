@@ -13,7 +13,7 @@ public class Player implements ISubject{
     private ILoseOneLifeObserver lostLiveObserver;
 
     public Player(int initialLives, int scoreForShot){
-        this.lives = 3;
+        this.lives = initialLives;
         this.score = 0;
         this.scoreForShot = scoreForShot;
         this.observers = new ArrayList<IObserver>();
