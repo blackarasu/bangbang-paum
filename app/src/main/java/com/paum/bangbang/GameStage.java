@@ -51,11 +51,11 @@ public class GameStage {
         this.doors = new Door[numOfAllDoors];
         for(int i = 0; i < numOfAllDoors; i++){
             if(i%3 == 0)
-                this.doors[i] = new Door(this.context, this.player, R.id.layoutLeft, vs_left, topLayoutsId[i], doorObserver, this.topLayoutsManagement);
+                this.doors[i] = new Door(this.context, this.player, R.id.layoutLeft, vs_left, topLayoutsId[i], doorObserver, this.topLayoutsManagement, this);
             else if(i%3==1)
-                this.doors[i] = new Door(this.context, this.player, R.id.layoutMiddle, vs_middle, topLayoutsId[i], doorObserver, this.topLayoutsManagement);
+                this.doors[i] = new Door(this.context, this.player, R.id.layoutMiddle, vs_middle, topLayoutsId[i], doorObserver, this.topLayoutsManagement, this);
             else
-                this.doors[i] = new Door(this.context, this.player, R.id.layoutRight, vs_right, topLayoutsId[i], doorObserver, this.topLayoutsManagement);
+                this.doors[i] = new Door(this.context, this.player, R.id.layoutRight, vs_right, topLayoutsId[i], doorObserver, this.topLayoutsManagement, this);
         }
         // starts generating characters
         generateCharacter();
@@ -173,5 +173,10 @@ public class GameStage {
         if(gapBetweenCharacters <= 500)
             return 500;
         return gapBetweenCharacters;
+    }
+
+    // returns actual level
+    public int getActualLevel(){
+        return this.level;
     }
 }

@@ -18,8 +18,10 @@ public class Door {
     private boolean accepted = false;
     private IDoorObserver doorObserver;
     private TopLayoutsManagement topLayoutsManagement;
+    private GameStage gameStage;
 
-    public Door(Context context, Player player, int layoutId, VolumeSound volumeSound, int topLayoutId, IDoorObserver doorObserver, TopLayoutsManagement topLayoutsManagement){
+    public Door(Context context, Player player, int layoutId, VolumeSound volumeSound, int topLayoutId,
+                IDoorObserver doorObserver, TopLayoutsManagement topLayoutsManagement, GameStage gameStage){
         this.character = null;
         this.volumeSound = volumeSound;
         this.context = context;
@@ -28,12 +30,19 @@ public class Door {
         this.topLayoutId = topLayoutId;
         this.doorObserver = doorObserver;
         this.topLayoutsManagement = topLayoutsManagement;
+        this.gameStage = gameStage;
     }
 
     // adds character to the door
     public void addCharacter(){
         ICharacterFactory characterFactory = new CharacterFactory();
-        ICharacter createdCharacter = characterFactory.createCharacter(this.context, this.player, this, 0.5);
+        // calculates the chance of generating bad character
+        double chanceForBadCharacter = (double)this.gameStage.getActualLevel()/10 + 0.5;
+        // chance can't be greater than 90%
+        if(chanceForBadCharacter >= 0.9)
+            chanceForBadCharacter = 0.9;
+        Log.i(null, "Probability for the bad character: " + chanceForBadCharacter);
+        ICharacter createdCharacter = characterFactory.createCharacter(this.context, this.player, this, chanceForBadCharacter);
         this.character = createdCharacter;
         this.character.appear();
         Log.i(null, "Created " + createdCharacter);

@@ -8,7 +8,7 @@ public class CharacterFactory implements ICharacterFactory{
 
     /**
      * Creates a character instance
-     * @param chance Probability (0-100) to create the good character
+     * @param chance Probability (0-100) to create a bad character
      * @return Instance of the character
      */
     @Override
@@ -17,11 +17,11 @@ public class CharacterFactory implements ICharacterFactory{
         Random rnd = new Random();
         int ret = rnd.nextInt(100) + 1;
         if(ret < chance * 100){
-            // return good character
+            // return bad character
             return new BadCharacter(context, player, door);
         }
         else{
-            // return bad character
+            // return good character
             return new GoodCharacter(context, player, door);
         }
     }
