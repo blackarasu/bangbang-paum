@@ -103,7 +103,7 @@ public class DbScores extends SQLiteOpenHelper {
      * @param n defines how many scores are gonna be returned
      * @return n highest scores in all matches
      */
-    public String getNScores(Integer n) {
+    public String getNBestPlayers(Integer n) {
         if (this.db == null) {
             this.db = this.getReadableDatabase();
         }
@@ -120,6 +120,25 @@ public class DbScores extends SQLiteOpenHelper {
             ++place;
         }
         return scores.toString();
+    }
+
+    public ArrayList<Integer> getNHighestScores(Integer n) {
+        if (this.db == null) {
+            this.db = this.getReadableDatabase();
+        }
+        if (!this.db.isReadOnly()) {
+            this.db = this.getReadableDatabase();
+        }
+        ArrayList<Integer> scores = new ArrayList<>();
+        @SuppressLint({"Recycle", "DefaultLocale"}) Cursor res = db.rawQuery(String.format("select %s from %s ORDER BY %s DESC LIMIT %d", SCORES_COLUMN_SCORE, SCORES_TABLE_NAME, SCORES_COLUMN_SCORE, n), null);
+        res.moveToFirst();
+        int place = 1;
+        while (!res.isAfterLast()) {
+            scores.add(res.getInt(res.getColumnIndex(SCORES_COLUMN_SCORE)));
+            res.moveToNext();
+            ++place;
+        }
+        return scores;
     }
 
     @Override

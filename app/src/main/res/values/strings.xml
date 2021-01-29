@@ -11,4 +11,7 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="menuTextToSpeech">Tekst do odczytania w main activity</string>
     <string name="noScoreToText">Brak wyników do przeczytania.</string>
+    <string name="FirstPlaceMessageAfterGame">Jesteś na pierwszym miejscu</string>
+    <string name="scoresToFirstPlaceMessage">Do pierwszego miejsca brakuje Tobie: %d punktów</string>
+    <string name="ekran_chwaly">Ekran chwały</string>
 </resources>

@@ -27,5 +27,6 @@ public class PlayerLivesObserver implements IObserver{
             // after the end of the game - closes the activity
             ((Activity)this.context).finish();
         });
+
     }
 }

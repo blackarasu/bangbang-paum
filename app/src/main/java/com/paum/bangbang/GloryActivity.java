@@ -1,7 +1,6 @@
 package com.paum.bangbang;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
@@ -46,18 +45,10 @@ public class GloryActivity extends AppCompatActivity {
                     Log.e("TTS", "The language is not supported.");
                 }
             }
-            if (dbScores.numberOfRows() == 0) {
-                dbScores.insertScore("Test", 666);
-                dbScores.insertScore("Test 1", 859);
-                dbScores.insertScore("Test 2", 121);
-                dbScores.insertScore("Test 3", 112);
-                dbScores.insertScore("Test 4", 256);
-            }
-            String text = dbScores.getNScores(3);
+            String text = dbScores.getNBestPlayers(3);
             if (text.isEmpty()) {
                 text = getString(R.string.noScoreToText);
             }
-            toast("Liczba wierszy w tabeli " + dbScores.numberOfRows());
             int speechStatus = textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null);
             if (speechStatus == TextToSpeech.ERROR) {
                 Log.e("TTS", "Error in converting Text to Speech.");

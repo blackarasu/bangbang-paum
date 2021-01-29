@@ -3,44 +3,44 @@ package com.paum.bangbang;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player implements ISubject{
+public class Player implements ISubject {
     private int lives;
     private int score;
-    private int scoreForShot;
+    private final int scoreForShot;
     // observers - activates when a player has no more lives
-    private List<IObserver> observers;
+    private final List<IObserver> observers;
     // observer - activates when a player lose a single life
     private ILoseOneLifeObserver lostLiveObserver;
 
-    public Player(int initialLives, int scoreForShot){
+    public Player(int initialLives, int scoreForShot) {
         this.lives = initialLives;
         this.score = 0;
         this.scoreForShot = scoreForShot;
-        this.observers = new ArrayList<IObserver>();
+        this.observers = new ArrayList<>();
     }
 
     // takes player's life
-    public void takeLive(){
+    public void takeLive() {
         this.lives--;
-        if(lostLiveObserver != null)
+        if (lostLiveObserver != null)
             lostLiveObserver.lostOneLifeDetected(); // informs an observer about losing a life
-        if(this.lives <= 0)
+        if (this.lives <= 0)
             inform();   // informs observers about lack of lives
     }
 
-    public void addScore(){
+    public void addScore() {
         this.score += this.scoreForShot;
     }
 
-    public int getScore(){
+    public int getScore() {
         return this.score;
     }
 
-    public int getLives(){
+    public int getLives() {
         return this.lives;
     }
 
-    public void attachLoseOneLifeObserver(ILoseOneLifeObserver observer){
+    public void attachLoseOneLifeObserver(ILoseOneLifeObserver observer) {
         this.lostLiveObserver = observer;
     }
 
@@ -56,7 +56,7 @@ public class Player implements ISubject{
 
     @Override
     public void inform() {
-        for(IObserver observer : this.observers){
+        for (IObserver observer : this.observers) {
             observer.update();
         }
     }
