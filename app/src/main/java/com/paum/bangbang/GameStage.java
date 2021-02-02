@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import android.speech.tts.TextToSpeech;
+import android.speech.tts.UtteranceProgressListener;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -138,7 +139,7 @@ public class GameStage {
         reset();
         this.countDownTimer.cancel();
         dbScores = new DbScores(context.getApplicationContext());
-        openDb();
+        //openDb();
         ArrayList<Integer> likely1stPlace = dbScores.getNHighestScores(1);
         String message;
         int toFirstPlace = 0;
@@ -151,14 +152,24 @@ public class GameStage {
             message = String.format(context.getString(R.string.scoresToFirstPlaceMessage), toFirstPlace);
         }
         dbScores.insertScore("Gracz", player.getScore());
-        int speechStatus = textToSpeech.speak(message, TextToSpeech.QUEUE_FLUSH, null);
-        if (speechStatus == TextToSpeech.ERROR) {
-            Log.e("TTS", "Error in converting Text to Speech.");
-        }
+        textToSpeech = new TextToSpeech(context.getApplicationContext(), status -> {
+            if (status == TextToSpeech.SUCCESS) {
+                Locale locale = new Locale("pl", "PL");
+                int ttsLang = textToSpeech.setLanguage(locale);
+                if (ttsLang == TextToSpeech.LANG_MISSING_DATA || ttsLang == TextToSpeech.LANG_NOT_SUPPORTED) {
+                    Log.e("TTS", "The language is not supported.");
+                }
+            }
+
+            int speechStatus = textToSpeech.speak(message, TextToSpeech.QUEUE_FLUSH, null);
+            if (speechStatus == TextToSpeech.ERROR) {
+                Log.e("TTS", "Error in converting Text to Speech.");
+            }
+        });
         closeDb();
     }
 
-    private void openDb() {
+    /*private void openDb() {
         textToSpeech = new TextToSpeech(context.getApplicationContext(), status -> {
             if (status == TextToSpeech.SUCCESS) {
                 Locale locale = new Locale("pl", "PL");
@@ -168,7 +179,7 @@ public class GameStage {
                 }
             }
         });
-    }
+    }*/
 
     private void closeDb() {
         try {

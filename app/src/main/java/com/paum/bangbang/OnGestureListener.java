@@ -50,6 +50,12 @@ public class OnGestureListener implements OnTouchListener {
         }
 
         @Override
+        public boolean onDoubleTapEvent(MotionEvent e){
+            onDoubleTapConfirmed();
+            return true;
+        }
+
+        @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
             boolean result = false;
             try {
@@ -134,5 +140,8 @@ public class OnGestureListener implements OnTouchListener {
     }
 
     public void onZoomIn(){
+    }
+
+    public void onDoubleTapConfirmed(){
     }
 }

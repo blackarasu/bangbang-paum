@@ -42,8 +42,18 @@ public class MainActivity extends AppCompatActivity {
             }
 
             public void onSingleTap() {
+                if(textToSpeech != null){
+                    textToSpeech.shutdown();
+                }
                 Intent intent = new Intent(MainActivity.this, GameActivity.class);
                 startActivity(intent);
+            }
+
+            public void onDoubleTapConfirmed(){
+                if(textToSpeech != null){
+                    textToSpeech.shutdown();
+                }
+                playIntroduction();
             }
 
             public void onZoomOut() {
@@ -55,7 +65,26 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume () {
         super.onResume();
+        playIntroduction();
+    }
 
+    @Override
+    protected void onDestroy (){
+        super.onDestroy();
+        if(textToSpeech != null){
+            textToSpeech.shutdown();
+        }
+    }
+
+    @Override
+    protected void onPause (){
+        super.onPause();
+        if(textToSpeech != null){
+            textToSpeech.shutdown();
+        }
+    }
+
+    private void playIntroduction(){
         textToSpeech = new TextToSpeech(getApplicationContext(), status -> {
             if (status == TextToSpeech.SUCCESS) {
                 Locale locale = new Locale("pl", "PL");
@@ -74,21 +103,5 @@ public class MainActivity extends AppCompatActivity {
 
             isTTSInitialized = true;
         });
-    }
-
-    @Override
-    protected void onDestroy (){
-        super.onDestroy();
-        if(textToSpeech != null){
-            textToSpeech.shutdown();
-        }
-    }
-
-    @Override
-    protected void onPause (){
-        super.onPause();
-        if(textToSpeech != null){
-            textToSpeech.shutdown();
-        }
     }
 }

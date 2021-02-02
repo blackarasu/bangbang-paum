@@ -9,7 +9,17 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <string name="menuTextToSpeech">Tekst do odczytania w main activity</string>
+    <string name="menuTextToSpeech">Witamy w grze BangBang. Aby przejść do ekranu pomocy przeciągnij ekran w górę lub w dół. Aby przejść do ekranu chwały przeciągnij ekran w prawo lub lewo.
+    Aby zagrać naciśnij raz w ekran. Aby ponownie odczytać możliwe opcje naciśnij w ekran dwukrotnie.</string>
+    <string name="helpTextToSpeech">Zasady gry BangBang: Celem gry jest zestrzeliwanie pojawiających się złodziei oraz przepuszczanie pojawiających się klientów. Pojawienie się złodzieja jest sygnalizowane
+        dźwiękiem ładowania pistoletu, natomiast pojawienie się klienta jest sygnalizowaniem dźwiękiem monet. Postacie mogą pojawić się w drzwiach znajdujących się po lewej stronie
+        (wtedy dźwięk postaci będzie słyszalny w lewej słuchawce), w drzwiach po prawej stronie (wtedy dźwięk postaci będzie słyszalny w prawej słuchawce) lub w drzwiach środkowych
+        (wtedy dźwięk postaci będzie słyszalny w obydwóch słuchawkach). Aby oddać strzał należy nacisnąć w ekran. W przypadku naciśnięcia lewej strony ekranu strzał zostanie oddany w lewe drzwi,
+        jeżeli zostanie naciśnięta środkowa część, to strzał zostanie oddany w środkowe drzwi oraz jeżeli prawa część ekranu, to strzał zostanie oddany w prawe drzwi.
+        Gra jest podzielona na etapy. W każdym etapie należy przepuścić klientów przez 9 drzwi. W danej chwili gracz może obsługiwać jedynie troje
+        drzwi (prawe, lewe oraz środkowe), dlatego aby zaliczyć etap należy się przełączać pomiędzy drzwiami przesuwając ekran w prawo i w lewo. Z każdym przesunięciem ekranu gracz przechodzi o trzy kolejne drzwi.
+        Zaliczenie etapu jest sygnalizowane dźwiękiem. Z każdym kolejnym etapem, gra staje się coraz trudniejsza, ponieważ postacie są szybciej generowane. Naciśnij w ekran, aby wrócić do ekranu głównego.
+        </string>
     <string name="noScoreToText">Brak wyników do przeczytania.</string>
     <string name="FirstPlaceMessageAfterGame">Jesteś na pierwszym miejscu</string>
     <string name="scoresToFirstPlaceMessage">Do pierwszego miejsca brakuje Tobie: %d punktów</string>

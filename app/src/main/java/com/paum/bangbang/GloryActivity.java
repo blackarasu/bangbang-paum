@@ -54,6 +54,8 @@ public class GloryActivity extends AppCompatActivity {
                 Log.e("TTS", "Error in converting Text to Speech.");
             }
 
+            speechStatus = textToSpeech.speak("Aby wrócić do ekranu głównego naciśnij w ekran.", TextToSpeech.QUEUE_ADD, null);
+
             isTTSInitialized = true;
         });
     }

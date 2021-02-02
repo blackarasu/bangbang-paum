@@ -90,7 +90,7 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onDestroy(){
         super.onDestroy();
-        this.gameStage.finish();
+        //this.gameStage.finish();
     }
 
     // handle swipe right
