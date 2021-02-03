@@ -5,7 +5,6 @@ import android.content.res.Resources;
 import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import android.speech.tts.TextToSpeech;
-import android.speech.tts.UtteranceProgressListener;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -139,7 +138,6 @@ public class GameStage {
         reset();
         this.countDownTimer.cancel();
         dbScores = new DbScores(context.getApplicationContext());
-        //openDb();
         ArrayList<Integer> likely1stPlace = dbScores.getNHighestScores(1);
         String message;
         int toFirstPlace = 0;
@@ -168,18 +166,6 @@ public class GameStage {
         });
         closeDb();
     }
-
-    /*private void openDb() {
-        textToSpeech = new TextToSpeech(context.getApplicationContext(), status -> {
-            if (status == TextToSpeech.SUCCESS) {
-                Locale locale = new Locale("pl", "PL");
-                int ttsLang = textToSpeech.setLanguage(locale);
-                if (ttsLang == TextToSpeech.LANG_MISSING_DATA || ttsLang == TextToSpeech.LANG_NOT_SUPPORTED) {
-                    Log.e("TTS", "The language is not supported.");
-                }
-            }
-        });
-    }*/
 
     private void closeDb() {
         try {
