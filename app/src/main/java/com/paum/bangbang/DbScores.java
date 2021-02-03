@@ -115,7 +115,7 @@ public class DbScores extends SQLiteOpenHelper {
         res.moveToFirst();
         int place = 1;
         while (!res.isAfterLast()) {
-            scores.append("Miejsce ").append(Integer.valueOf(place).toString()).append(". Gracz: ").append(res.getString(res.getColumnIndex(SCORES_COLUMN_NAME))).append(" z wynikiem ").append(Integer.valueOf(res.getInt(res.getColumnIndex(SCORES_COLUMN_SCORE))).toString()).append(" punktów. ");
+            scores.append("Miejsce ").append(Integer.valueOf(place).toString()).append(" z wynikiem ").append(Integer.valueOf(res.getInt(res.getColumnIndex(SCORES_COLUMN_SCORE))).toString()).append(" punktów. ");
             res.moveToNext();
             ++place;
         }
