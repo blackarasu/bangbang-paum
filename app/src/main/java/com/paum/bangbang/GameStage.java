@@ -49,9 +49,9 @@ public class GameStage {
         // initialize doors
         int[] topLayoutsId = this.topLayoutsManagement.getLayoutsId();
         IDoorObserver doorObserver = new DoorObserver(this);
-        VolumeSound vs_left = new VolumeSound(0, 1);
+        VolumeSound vs_left = new VolumeSound(1, 0);
         VolumeSound vs_middle = new VolumeSound(1, 1);
-        VolumeSound vs_right = new VolumeSound(1, 0);
+        VolumeSound vs_right = new VolumeSound(0, 1);
         this.doors = new Door[numOfAllDoors];
         for (int i = 0; i < numOfAllDoors; i++) {
             if (i % 3 == 0)
